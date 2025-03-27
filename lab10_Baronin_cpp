@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+
+struct microProcessor {
+    string Name;
+    string Firm;
+    double Frequency;
+    int Pin_Number;
+};
+int main()
+{
+    microProcessor Pentium, Celeron, Duron, Athlon;
+    Pentium.Name = "Pentium";
+    Celeron.Name = "Celeron";
+    Duron.Name = "Duron";
+    Athlon.Name = "Athlon";
+
+    Pentium.Firm = "AMD";
+    Celeron.Firm = "IDC";
+    Duron.Firm = "Texas Instrument";
+    Athlon.Firm = "Motorola";
+
+    Pentium.Frequency = 2.5;
+    Celeron.Frequency = 13.7;
+    Duron.Frequency = 29.0;
+    Athlon.Frequency = 144.0;
+
+    Pentium.Pin_Number = 44;
+    Celeron.Pin_Number = 68;
+    Duron.Pin_Number = 61;
+    Athlon.Pin_Number = 59;
+
+    microProcessor Microprocessors[4];
+    Microprocessors[0] = Pentium;
+    Microprocessors[1] = Celeron;
+    Microprocessors[2] = Duron;
+    Microprocessors[3] = Athlon;
+
+    for (int i = 0; i < 4; i++) {
+        cout << "Name is " << Microprocessors[i].Name << ". Firm  is " << Microprocessors[i].Firm << ". Frequency is: " << Microprocessors[i].Frequency << ". Pin_Number is: " << Microprocessors[i].Pin_Number << endl;
+    }
+
+    for (int j = 0; j < 4; j++) {
+        if (Microprocessors[j].Firm == "AMD")
+        {
+            Microprocessors[j].Name = "Celeron";
+        }
+    }
+    for (int i = 0; i < 4; i++) {
+        cout << "Name is " << Microprocessors[i].Name << ". Firm  is " << Microprocessors[i].Firm << ". Frequency is: " << Microprocessors[i].Frequency << ". Pin_Number is: " << Microprocessors[i].Pin_Number << endl;
+    }
+}
