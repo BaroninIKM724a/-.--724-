@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+
+int CalculationOfNElement(int n) // 3
+{
+	int answer;
+
+	if (n == 1)
+	{
+		return 40;
+	}
+	answer = CalculationOfNElement(n - 1) / 2;
+
+	return answer;
+}
+
+int main()
+{
+	int n;
+	cout << "Please enter n: " << endl;
+	cin >> n;
+	if (n > 0)
+	{
+		int element = CalculationOfNElement(n);
+		cout << "A value of " << n << "element is " << element;
+	}
+	else
+	{
+		cout << "Please enter n > 0 " << endl;
+	}
+}
