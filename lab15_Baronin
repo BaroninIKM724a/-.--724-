@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int SIZE = 20;
+    double a[SIZE];
+    double b[SIZE]; // b can be at most SIZE elements
+    int bSize = 0;  // actual size of b
+
+    // Fill array a with 20 real numbers
+    cout << "Enter 20 real numbers:" << endl;
+    for (int i = 0; i < SIZE; i++) {
+        cin >> a[i];
+    }
+
+    // Create array b with odd elements from a
+    for (int i = 0; i < SIZE; i++) {
+        if (static_cast<int>(a[i]) % 2 != 0) {
+            b[bSize] = a[i];
+            bSize++;
+        }
+    }
+
+    // Sort array b in descending order (simple bubble sort)
+    for (int i = 0; i < bSize - 1; i++) {
+        for (int j = 0; j < bSize - i - 1; j++) {
+            if (b[j] < b[j + 1]) {
+                // Swap b[j] and b[j+1]
+                double temp = b[j];
+                b[j] = b[j + 1];
+                b[j + 1] = temp;
+            }
+        }
+    }
+
+    // Output sorted array b
+    cout << "Array b (odd elements sorted in descending order):" << endl;
+    for (int i = 0; i < bSize; i++) {
+        cout << b[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
