@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int MAX = 100;
+
+struct Phone {
+    string lastName;
+    string firstName;
+    string patronymic;
+    string address;
+    string number;
+    int localMinutes;
+    int longDistanceMinutes;
+};
+
+void printSubscriber(const Phone& p) {
+    cout << "Name: " << p.lastName << " " << p.firstName << " " << p.patronymic << endl;
+    cout << "Address: " << p.address << endl;
+    cout << "Number: " << p.number << endl;
+    cout << "Local Minutes: " << p.localMinutes << endl;
+    cout << "Long Distance Minutes: " << p.longDistanceMinutes << endl;
+    cout << "-------------------------" << endl;
+}
+
+void sortAlphabetically(Phone arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (arr[j].lastName > arr[j + 1].lastName) {
+                Phone temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    const int LIMIT = 100;
+
+    Phone subscribers[MAX] = {
+        {"Smith", "John", "Edward", "123 Elm Street", "555-1234", 120, 0},
+        {"Doe", "Jane", "Ann", "456 Oak Avenue", "555-5678", 80, 30},
+        {"Brown", "Charlie", "Lee", "789 Maple Blvd", "555-9012", 60, 0}
+    };
+    int n = 3;
+
+    cout << "a) Subscribers with local minutes over limit:\n";
+    for (int i = 0; i < n; ++i) {
+        if (subscribers[i].localMinutes > LIMIT)
+            printSubscriber(subscribers[i]);
+    }
+
+    cout << "\nb) Subscribers who used long distance:\n";
+    for (int i = 0; i < n; ++i) {
+        if (subscribers[i].longDistanceMinutes > 0)
+            printSubscriber(subscribers[i]);
+    }
+
+    cout << "\nc) Subscribers in alphabetical order:\n";
+    sortAlphabetically(subscribers, n);
+    for (int i = 0; i < n; ++i) {
+        printSubscriber(subscribers[i]);
+    }
+
+    return 0;
+}
