@@ -1,0 +1,115 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Base class: Address
+class Address {
+protected:
+    string city;
+    string street;
+    int buildingNumber;
+    int postalCode;
+
+public:
+    Address(string c = "", string s = "", int b = 1, int p = 10000) {
+        setCity(c);
+        setStreet(s);
+        setBuildingNumber(b);
+        setPostalCode(p);
+    }
+
+    void setCity(const string& c) {
+        if (!c.empty())
+            city = c;
+        else
+            cout << "Invalid city name!" << endl;
+    }
+
+    void setStreet(const string& s) {
+        if (!s.empty())
+            street = s;
+        else
+            cout << "Invalid street name!" << endl;
+    }
+
+    void setBuildingNumber(int b) {
+        if (b > 0)
+            buildingNumber = b;
+        else
+            cout << "Invalid building number!" << endl;
+    }
+
+    void setPostalCode(int p) {
+        if (p >= 10000 && p <= 99999)
+            postalCode = p;
+        else
+            cout << "Invalid postal code!" << endl;
+    }
+
+    void printAddress() const {
+        cout << "City: " << city << ", Street: " << street
+             << ", Building: " << buildingNumber << ", Postal Code: " << postalCode << endl;
+    }
+};
+
+// Derived class: Organization
+class Organization : public Address {
+private:
+    string name;
+    int employeeCount;
+
+public:
+    Organization(string n, int e, string c, string s, int b, int p)
+        : Address(c, s, b, p) {
+        setName(n);
+        setEmployeeCount(e);
+    }
+
+    void setName(const string& n) {
+        if (!n.empty())
+            name = n;
+        else
+            cout << "Invalid organization name!" << endl;
+    }
+
+    void setEmployeeCount(int e) {
+        if (e >= 0)
+            employeeCount = e;
+        else
+            cout << "Invalid employee count!" << endl;
+    }
+
+    void printOrganization() const {
+        cout << "Organization Name: " << name << endl;
+        cout << "Employees: " << employeeCount << endl;
+        printAddress();
+    }
+};
+
+int main() {
+    // Create organization with valid data
+    Organization org("OpenAI", 2000, "San Francisco", "Pine Street", 123, 94107);
+
+    cout << "\nInitial organization info:\n";
+    org.printOrganization();
+
+    // Try to set invalid data
+    org.setName("");
+    org.setEmployeeCount(-10);
+    org.setCity("");
+    org.setBuildingNumber(0);
+    org.setPostalCode(999); // invalid
+
+    // Set valid changes
+    org.setName("AI Labs");
+    org.setEmployeeCount(2500);
+    org.setCity("New York");
+    org.setBuildingNumber(45);
+    org.setPostalCode(10001);
+
+    cout << "\nUpdated organization info:\n";
+    org.printOrganization();
+
+    return 0;
+}
