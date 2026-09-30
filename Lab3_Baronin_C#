@@ -1,0 +1,31 @@
+// Task 1
+Console.WriteLine("Please enter N:");
+int N = int.Parse(Console.ReadLine());
+
+int sum = 0;
+
+for (int i = 1; i <= N; i++)
+{
+    if (i % 2 != 0)
+    {
+        sum += i;
+    }
+}
+
+Console.WriteLine($"Sum = {sum}");
+
+// Task 2
+int[] масив = {7, 3, 12, 5, 9};
+Console.WriteLine(масив.Length);
+
+int max = масив[0];
+
+for (int i = 1; i < масив.Length; i++)
+{
+    if (масив[i] > max)
+    {
+        max = масив[i];
+    }
+}
+
+Console.WriteLine($"Max = {max}");
