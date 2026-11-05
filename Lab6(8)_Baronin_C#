@@ -1,0 +1,146 @@
+// program.cs
+
+using Lab6_Baronin;
+
+Car mazeratty = new Car(100, 90, "Mazeratty", 2);
+Car bmw = new Car(100, 70, "BMW", 0);
+
+Bike harley = new Bike(100, 90, "Harley Davidson", 2);
+Bike suzuki = new Bike(100, 90, "Suzuki", 4);
+
+Truck man = new Truck(100, 90, "Man", 400);
+Truck mack = new Truck(100, 90, "Mack", 95);
+
+List<Vehicle> vehicles = new List<Vehicle>();
+
+vehicles.Add(mazeratty);
+vehicles.Add(bmw);
+vehicles.Add(harley);
+vehicles.Add(suzuki);
+vehicles.Add(man);
+vehicles.Add(mack);
+
+foreach (Vehicle vehicle in vehicles)
+{
+     vehicle.PrintInfo();
+}
+
+// Vehicle.cs
+
+namespace Lab6_Baronin
+{
+    internal class Vehicle
+    {
+        public double Speed { get; set; }
+        public int FuelCapacity { get; set; }
+        public string Model { get; set; }
+
+        public Vehicle(double speed, int fuelcapasity, string model)
+        {
+            Speed = speed;
+            FuelCapacity = fuelcapasity;
+            Model = model;
+        }
+
+        public virtual void PrintInfo()
+        {
+            Console.WriteLine($"{Speed} km/h, {FuelCapacity}, {Model}");
+        }
+    }
+}
+
+// Car.cs
+
+namespace Lab6_Baronin
+{
+    internal class Car : Vehicle
+    {
+        public int NumberOfDoors { get; set; }
+
+        public Car(double speed, int fuelcapasity, string model, int numberofdoors) :
+            base (speed, fuelcapasity, model)
+        {
+            NumberOfDoors = numberofdoors;
+        }
+
+        public override void PrintInfo()
+        {
+            base.PrintInfo();
+            Console.WriteLine($"Кiлькiсть дверей: {NumberOfDoors}");
+        }
+
+        public void Ride()
+        {
+            if (NumberOfDoors == 0)
+            {
+                throw new InvalidOperationException($"{Model} не має дверей, або це байк.");
+            }
+
+            Console.WriteLine($"{Model} має {NumberOfDoors} дверей.");
+        }
+    }
+}
+
+// Bike.cs
+
+namespace Lab6_Baronin
+{
+    internal class Bike : Vehicle
+    {
+        public int NumberOfWheels { get; set; }
+
+        public Bike(double speed, int fuelcapasity, string model, int numberofwheels) :
+            base(speed, fuelcapasity, model)
+        {
+            NumberOfWheels = numberofwheels;
+        }
+
+        public override void PrintInfo()
+        {
+            base.PrintInfo();
+            Console.WriteLine($"Кiлькiсть колiс: {NumberOfWheels}");
+        }
+
+        public void Drive()
+        {
+            if (NumberOfWheels >= 3)
+            {
+                throw new InvalidOperationException($"{Model} не є байком.");
+            }
+
+            Console.WriteLine($"{Model} має {NumberOfWheels} колес.");
+        }
+    }
+}
+
+// Truck.cs
+
+namespace Lab6_Baronin
+{
+    internal class Truck : Vehicle
+    {
+        public int Payload { get; set; }
+
+        public Truck(double speed, int fuelcapasity, string model, int payload) :
+            base(speed, fuelcapasity, model)
+        {
+            Payload = payload;
+        }
+
+        public override void PrintInfo()
+        {
+            base.PrintInfo();
+            Console.WriteLine($"Вантажопiдйомнiсть: {Payload} кiлограмiв");
+        }
+
+        public void LoadCapacity()
+        {
+            if (Payload <= 150)
+            {
+                throw new InvalidOperationException($"{Model} не є вантажiвкою.");
+            }
+
+            Console.WriteLine($"{Model} має вантажопiдйомнiсть {Payload} кiлограм.");
+        }
+    }
+}
